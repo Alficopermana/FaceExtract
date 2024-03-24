@@ -260,7 +260,7 @@ def featureFace(imagePath):
         # Save the result image
         cv2.imwrite('Results/chin.png', result_image)
 
-def finalresult(imagePath):
+def finalresult(imagePath, size):
     # Baca gambar
     image = cv2.imread(imagePath)  # Ganti 'your_image_path.jpg' dengan path gambar Anda
 
@@ -287,22 +287,22 @@ def finalresult(imagePath):
                 # Potong bagian gambar yang terdeteksi
                 detected_object = image[y:y+h, x:x+w]
 
-                # Resize gambar menjadi ukuran 1:1 (persegi)
-                # size = max(detected_object.shape[0], detected_object.shape[1])
-                # square_image = cv2.resize(detected_object, (500, 500))
+                # # Resize gambar menjadi ukuran 1:1 (persegi)
+                size = max(detected_object.shape[0], detected_object.shape[1])
+                square_image = cv2.resize(detected_object, (size, size))
 
                 # Ambil nama file dari imagePath
                 file_name = imagePath.split('/')[-1]  # Mengambil bagian terakhir dari path sebagai nama file
+
                 # Simpan gambar yang terdeteksi dengan nama yang sama seperti gambar input
-                # cv2.imwrite("results/" + file_name, square_image)
-                cv2.imwrite("results/" + file_name, detected_object)
+                cv2.imwrite("results/" + file_name, square_image)
 
 processFace(imagePath= 'Assets/Foto.jpg')
 featureFace(imagePath= 'Results/faceExtraction.png')
-finalresult(imagePath= 'Results/faceExtraction.png')
-finalresult(imagePath= 'Results/chin.png')
-finalresult(imagePath= 'Results/forehead.png')
-finalresult(imagePath= 'Results/leftCheek.png')
-finalresult(imagePath= 'Results/rightCheek.png')
-# extract_faces(imagePath= 'Results/leftCheek.png')
+finalresult(imagePath= 'Results/faceExtraction.png', size=412)
+finalresult(imagePath= 'Results/chin.png', size=200)
+finalresult(imagePath= 'Results/forehead.png', size=200)
+finalresult(imagePath= 'Results/leftCheek.png', size=200)
+finalresult(imagePath= 'Results/rightCheek.png', size=200)
+
 
